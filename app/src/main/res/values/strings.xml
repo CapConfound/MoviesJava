@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MoviesJava</string>
+    <string name="omdb_api_key">8e102e39</string>
+</resources>
