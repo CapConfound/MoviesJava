@@ -12,15 +12,17 @@
         android:id="@+id/topPanel"
         android:background="@color/colorPrimaryDark"
         >
+
         <EditText
+            android:id="@+id/edit_query"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="100"
-            android:maxLines="1"
             android:layout_gravity="center"
+            android:layout_weight="100"
+            android:lines="1"
+            android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:id="@+id/edit_query"/>
+            android:textSize="25sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

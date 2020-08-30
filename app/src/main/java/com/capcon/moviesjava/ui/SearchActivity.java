@@ -40,17 +40,14 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.w("onCreate", "beginning of the method");
         setContentView(R.layout.activity_main);
-
-
-
     }
 
-    public void showError(){
+    public void showError(String errorText){
         TextView error = findViewById(R.id.error_text);
         RecyclerView rv = findViewById(R.id.recycler_view);
         error.setVisibility(View.VISIBLE);
+        error.setText(errorText);
         rv.setVisibility(View.INVISIBLE);
     }
 
@@ -65,12 +62,9 @@ public class SearchActivity extends AppCompatActivity {
 
         searchTitle = (EditText) findViewById(R.id.edit_query);
         String query = searchTitle.getText().toString();
-
         rvMovies = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(layoutManager);
-
-
         SearchService service = ApiClient.getRetrofitInstance().create(SearchService.class);
         Call<SearchResult> call = service.getMovieInfo(query);
         call.enqueue(new Callback<SearchResult>() {
@@ -90,20 +84,16 @@ public class SearchActivity extends AppCompatActivity {
                                      recyclerView.setLayoutManager(new LinearLayoutManager(context));
                                  }
                                  else{
-                                     showError();
+                                     showError("Response invalid");
                                  }
-
                              }
-
-
                          }
 
                          @Override
                          public void onFailure(Call<SearchResult> call, Throwable t) {
                              Log.w("onFailure ", t.getMessage());
                              Toast.makeText(SearchActivity.this,"Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                             showError();
-
+                             showError("Response failed");
                          }
                      }
         );
